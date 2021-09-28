@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+    {% include 'alerts.html' %}
+    <div class="container">
+        <div class="row">
+        {% include 'accounts/dashboard_sidebar.html' %}
+        <main class="col-md-9">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Your order history </strong>
+                
+            </header>
+            <div class="card-body mb-5">
+                <div class="row mb-5"> 
+                    <div class="col-md-12 ">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">Order №</th>
+                                <th scope="col">Billing Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Order Total</th>
+                                <th scope="col">Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for order in orders %}
+                                <tr>
+                                    <th scope="row"><a href="{% url 'order_details' order.order_number %}">{{ order.order_number }}</a></th>
+                                    <td><a href="{% url 'dashboard' %}">{{ order.full_name }}</a></td>
+                                    <td>{{ order.phone }}</td>
+                                    <td>${{ order.order_total }} USD</td>
+                                    <td>{{ order.created_at }}</td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                    </div>
+                </div> <!-- row.// -->
+            </div> <!-- card-body .// -->
+            </article> <!-- order-group.// --> 
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

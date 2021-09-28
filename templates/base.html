@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="max-age=604800" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Fun-shop</title>
+
+<link href="{% static 'images/letter-f.jpg' %}" rel="shortcut icon" type="image/x-icon">
+
+<!-- jQuery -->
+<script src="{% static 'js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
+
+<!-- Bootstrap4 files-->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+
+<!-- Font awesome 5 -->
+<link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet">
+
+<!-- Icons -->
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+<!-- custom style -->
+<link href="{% static 'css/ui.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'css/responsive.css' %}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+<link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
+
+<!-- custom javascript -->
+<script src="{% static 'js/script.js' %}" type="text/javascript"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AZ-544R6U_Wz8WOIHWyqxXZYQzPw2GeamXwZwYw24VeasHAnb2tq7Bfl75WsBTwsVuNNLxVpw3ZRXYjK&currency=USD"></script>
+
+<script type="text/javascript">
+/// some script
+
+// jquery ready start
+$(document).ready(function() {
+	// jQuery code
+
+}); 
+// jquery end
+</script>
+
+</head>
+<body>
+
+		
+	<header class="section-header">
+	<section class="header-main border-bottom">
+		<div class="container">
+	<div class="row align-items-center">
+		<div class="col-lg-2 col-md-3 col-6">
+			<a href="{% url 'home' %}" class="brand-wrap" >
+				<h1>Fun Shop</h1>
+			</a> <!-- brand-wrap.// -->
+		</div>
+		<div class="col-lg col-sm col-md col-6 flex-grow-0">
+			<div class="category-wrap dropdown d-inline-block float-right">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
+					<i class="fa fa-bars"></i> All category 
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="{% url 'store' %}">All items</a>
+					{% for category in links %}
+					<a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
+					{% endfor %}
+				</div>
+			</div>  <!-- category-wrap.// -->
+		</div> <!-- col.// -->
+		<a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
+		<div class="col-lg  col-md-6 col-sm-12 col">
+			<form action="{% url 'search' %}" class="search" method="GET">
+				<div class="input-group w-100">
+					<input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword" required>
+					
+					<div class="input-group-append">
+					<button class="btn btn-primary" type="submit">
+						<i class="fa fa-search"></i>
+					</button>
+					</div>
+				</div>
+			</form> <!-- search-wrap .end// -->
+		</div> <!-- col.// -->
+		<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+					<div class="d-flex justify-content-end mb-3 mb-lg-0">
+					{% if user.id is None %}
+						<div class="widget-header">
+							<small class="title text-muted">Welcome guest!</small>
+							<div> 
+								<a href="{% url 'login' %}">Sign in</a> <span class="dark-transp"> | </span>
+								<a href="{% url 'register' %}"> Register</a>
+							</div>
+						</div>
+					{% else %}
+						<div class="widget-header">
+							<small class="title text-muted">Welcome {{ user.first_name }}!</small>
+							<div> 
+								<a href="{% url 'dashboard' %}">Dashboard</a> <span class="dark-transp"> | </span>
+								<a href="{% url 'logout' %}"> LogOut</a>
+						</div>
+						</div>
+
+					{% endif %}
+						<a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+							<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+							<span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
+						</a>
+					</div> <!-- widgets-wrap.// -->
+				</div> <!-- col.// -->
+	</div> <!-- row.// -->
+		</div> <!-- container.// -->
+	</section> <!-- header-main .// -->
+
+
+
+
+	</header> <!-- section-header.// -->
+
+	{% block content %}
+
+	{% endblock %}
+
+<!-- ========================= FOOTER ========================= -->
+<footer>
+	<div class="container">
+	  <div class="row">
+			   <div class="col-md-4 col-sm-6 col-xs-12">
+				
+					<h1 style="color: #fff !important;">Fun Shop</h1>
+				
+				<ul class="sci">
+					<li><a href="" class="telegram" target="_blank"><i class='bx bxl-telegram'></i></a></li>
+					<li><a href="https://twitter.com/fakha0" class="twitter" target="_blank"><i class='bx bxl-twitter'></i></a></li>
+					<li><a href="https://www.instagram.com/roboticslabpython/" class="instagram" target="_blank"><i class='bx bxl-instagram-alt'></i></a></li>
+					<li><a href="https://www.youtube.com/channel/UC89eYzOxvAb8vmc3RU6nhuQ" class="youtube" target="_blank"><i class='bx bxl-youtube' ></i></a></li>
+				  </ul>
+			   </div>
+			   
+			   <div class="col-md-4 col-sm-6 col-xs-12">
+				   <ul class="menu">
+						<span>Menu</span>    
+						<li>
+						   <a href="{% url 'home' %}">Home</a>
+						 </li>
+							  
+						 <li>
+							<a href="{% url 'store' %}">Shop</a>
+						 </li>
+							  
+						 <li>
+						   <a href="{% url 'dashboard' %}">DashBoard</a>
+						 </li>
+							  
+					</ul>
+			   </div>
+		  
+			   <div class="col-md-4 col-sm-6 col-xs-12">
+				 <ul class="address">
+				   <span>Contact</span>       
+				   <li>
+					  <i class="fa fa-phone" aria-hidden="true"></i> 
+					  <a href="tel:+998909811928" >+998 90 981 19 28</a> <br>
+				   </li>
+				   <li>
+					  <i class="fa fa-map-marker" aria-hidden="true"></i> 
+					  <a href="#"> Yakkasaroy, Tashkent</a>
+				   </li> 
+				   <li>
+					  <i class="fa fa-envelope" aria-hidden="true"></i> 
+					  <a href="mailto:dombit1999@gmail.com" >dombit1999@gmail.com</a> <br>
+				   </li> 
+				  </ul>
+			   </div>
+		   </div>
+	   </div>
+	   <p class="text-center" style="color: #fff;">Copright &copy; 2021 CodeDash. All rights.</p>
+   </footer>
+
+	<!-- ========================= FOOTER END // ========================= -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('.thumb a').click(function(e){
+				e.preventDefault();
+				$('.mainImage img').attr('src', $(this).attr('href'));
+			})
+		})
+	</script>
+</body>
+</html>

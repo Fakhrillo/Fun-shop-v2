@@ -1,0 +1,171 @@
+/* Hide default style */
+.rate > input{
+    display: none;
+}
+
+.rate{
+    display: inline-block;
+    border: 0;
+}
+
+.rate > label{
+    float: right;
+}
+
+/* Make stars */
+.rate > label::before{
+    display: inline-block;
+    font-size: 1.1rem;
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 600;
+    content: "\f005";
+    margin: 5px;
+    padding: 0.3rem, .2rem;
+    cursor: pointer;
+}
+
+/* Optimize stars */
+
+.rate .half::before{
+    content: "\f089";
+    /* font-weight: 900; */
+    position: absolute;
+    
+    padding-right: 0;
+}
+
+input:checked ~ label, label:hover ~ label{
+    color: #ffb503;
+}
+
+input:checked + label:hover, input:checked ~ label:hover, input:checked ~ label:hover ~label, label:hover ~ input:checked ~ label{
+    color: #cc9000;
+}
+
+.half:hover{
+    color: #ffb503;
+}
+
+.rating-star i{
+    color: #ffb503 !important;
+}
+
+ul.thumb{
+    margin: 0 auto;
+    padding: 0;
+    float: left;
+}
+
+ul.thumb li{
+    list-style: none;
+    margin: 10px;
+}
+
+ul.thumb li img{
+    width: 80px;
+    height: 80px;
+    border: 1px solid gray;
+}
+
+footer {
+    padding: 30px 0px;
+    background: #44A08D;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #093637, #44A08D);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #093637, #44A08D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}	       
+
+
+.address span, 
+.menu span {
+   color: #fff; 
+   font-weight: bold; 
+   border-bottom: 1px solid #c7c7c7; 
+   padding: 10px 0px;
+   display: block;
+   text-transform: uppercase;
+   font-size: 16px;
+   letter-spacing: 3px;
+}
+ 
+.address li a, 
+.menu li a {
+    color: #FFF;
+    letter-spacing: 3px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.address li, 
+.menu li {
+    margin: 20px 0px;
+    list-style: none;
+}
+
+.address li a:hover, 
+.menu li a:hover {
+    color: #000;
+    transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+}
+
+.address .fa {
+    color: #fff;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.sci {
+    margin-top: 40px;
+    display: flex;
+    margin-left: 0;
+    padding-left: 0;
+    position: absolute;
+    left: 0;
+}
+
+.sci li {
+    list-style: none;
+    transition: all 1s;
+    margin: 20px;
+    transform: scale(1.6)
+}
+
+.sci li:hover {
+    transform: scale(1.2);
+}
+
+.sci li a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    /* background: #2e3336; */
+    background: linear-gradient(to top, #093637, #44A08D);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.sci li .telegram:hover {
+    background: #3167EB;
+}
+.sci li .twitter:hover {
+    background: #08AFF9;
+}
+.sci li .instagram:hover {
+    background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+}
+
+.sci li .youtube:hover {
+    background: #FF0000;
+}
+
+.sci li a .fa {
+    color: #fff;
+    font-size: 20px;
+}
