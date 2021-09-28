@@ -31,24 +31,25 @@ def register(request):
             username = email.split('@')[0]
             user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
             user.phone_number = phone_number
+            user.is_active = True
             user.save()
 
             #Activation
-            current_site = get_current_site(request)
-            mail_subject = 'Please activate your account!'
-            message = render_to_string('accounts/account_verification.html', {
-                'user': user,
-                'domain': current_site,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
+            # current_site = get_current_site(request)
+            # mail_subject = 'Please activate your account!'
+            # message = render_to_string('accounts/account_verification.html', {
+            #     'user': user,
+            #     'domain': current_site,
+            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            #     'token': default_token_generator.make_token(user),
 
-            })
-            to_email = email
-            send_email = EmailMessage(mail_subject, message, to=[to_email])
-            send_email.send()
+            # })
+            # to_email = email
+            # send_email = EmailMessage(mail_subject, message, to=[to_email])
+            # send_email.send()
 
-            # messages.success(request, 'Registration successfully completed!')
-            return redirect('/accounts/login/?command=verification&email='+email)
+            messages.success(request, 'Registration successfully completed!')
+            return redirect('login')
 
     else:
         form = RegistrationForm()
@@ -127,29 +128,32 @@ def logout(request):
     messages.success(request, 'You are loged out!')
     return redirect('login')
 
-def activate(request, uidb64, token):
+# def activate(request, uidb64, token):
 
-    try:
-        uid = urlsafe_base64_decode(uidb64).decode()
-        user = Account._default_manager.get(pk=uid)
+#     try:
+#         uid = urlsafe_base64_decode(uidb64).decode()
+#         user = Account._default_manager.get(pk=uid)
     
-    except(TypeError, ValueError, OverflowError, Account.DoesNotExist):
-        user = None
+#     except(TypeError, ValueError, OverflowError, Account.DoesNotExist):
+#         user = None
 
-    if user is not None and default_token_generator.check_token(user, token):
-        user.is_active = True
-        user.save()
-        messages.success(request, 'Congratulations! Your account is activated.')
-        return redirect('login')
-    else:
-        messages.error(request, 'Invalid activation link')
-        return redirect('register')
+#     if user is not None and default_token_generator.check_token(user, token):
+#         user.is_active = True
+#         user.save()
+#         messages.success(request, 'Congratulations! Your account is activated.')
+#         return redirect('login')
+#     else:
+#         messages.error(request, 'Invalid activation link')
+#         return redirect('register')
         
 @login_required(login_url = 'login')
 def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
     orders_count = orders.count()
-    userprofile = UserProfile.objects.get(user_id=request.user.id)
+    try:
+        userprofile = UserProfile.objects.get(user_id=request.user.id)
+    except UserProfile.DoesNotExist:
+        userprofile = None
     context = {
         'orders_count':orders_count,
         'userprofile':userprofile,
@@ -230,6 +234,7 @@ def my_orders(request):
 @login_required(login_url='/login/')
 def edit_profile(request):
     userprofile = get_object_or_404(UserProfile, user=request.user)
+    # userprofile = UserProfile.objects.get(user_id=request.user.id)
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
