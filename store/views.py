@@ -1,3 +1,4 @@
+from django.utils.text import slugify
 from accounts.models import UserProfile
 from django.contrib import messages
 from .forms import ReviewForm
@@ -9,6 +10,7 @@ from carts.views import _cart_id
 from carts.models import CartItem
 from orders.models import OrderProduct
 from django.core.paginator import Paginator
+from taggit.models import Tag
 
 # Create your views here.
 def store(request, cslug=None):
@@ -79,6 +81,15 @@ def search(request):
         'counter':counter,
     }
     return render(request, 'store/store.html', context)
+
+def tagged(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    posts = Product.objects.filter(tags=tag)
+    context = {
+        "tag": tag,
+        "posts": posts,
+    }
+    return render(request, 'store/product_detail.html', context)
 
 def submit_review(request, product_id):
     url = request.META.get('HTTP_REFERER')

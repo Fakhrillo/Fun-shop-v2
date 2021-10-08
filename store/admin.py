@@ -1,8 +1,9 @@
 from abc import abstractmethod
 from django.contrib import admin
-from django.db import models
 from .models import Product, Variation, ReviewRating, ProductGallery
 import admin_thumbnails
+
+
 # Register your models here.
 @admin_thumbnails.thumbnail('image')
 class ProductGalleryInline(admin.TabularInline):

@@ -3,11 +3,13 @@ from django.urls import reverse
 from category.models import Category
 from accounts.models import Account
 from django.db.models import Avg, Count
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Product(models.Model):
     product_name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
+    tags = TaggableManager()
     description = models.TextField(max_length=1000, blank=True)
     price = models.IntegerField()
     images = models.ImageField(upload_to='photos/products', )

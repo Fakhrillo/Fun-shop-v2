@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-boa=jh4074^h&cf_#=fp^7h@s1glnz5_bj@su%1m-$m9-0wsol'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['http://fakhrullo.pythonanywhere.com/', '127.0.0.1']
 
 
 # Application definition
@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'carts',
     'orders',
     'admin_honeypot',
+    'easy_thumbnails',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +76,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'fun_shop_v2.wsgi.application'
 
 AUTH_USER_MODEL = 'accounts.Account'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -162,3 +165,5 @@ MESSAGE_TAGS = {
 # EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 # EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 # EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+# EMAIL_USE_SSL = False
+  

@@ -1,7 +1,4 @@
-from decimal import Context
 from orders.models import OrderProduct
-
-from django.contrib.messages.api import success
 from carts.models import Cart, CartItem
 from django.contrib import messages, auth
 from .models import Account, UserProfile
@@ -17,6 +14,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from carts.views import _cart_id
 import requests
+from django.core.mail import send_mail
 # Create your views here.
 def register(request):
 
